@@ -60,7 +60,7 @@ const SignUp2 = () => {
 
       localStorage.setItem('token', data.token);
       
-      navigate('/dashboard');
+      navigate('/dashboard', { state: { email: data.email } });
     } catch (error) {
       setError(error.message);
     }

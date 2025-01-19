@@ -4,7 +4,7 @@ const DashBoard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const location = useLocation();
-  const email = location.state.email;
+  const email = location.state?.email || user?.email; // Use email from location or user
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -26,7 +26,7 @@ const DashBoard = () => {
           </li>
         </div>
         <div className="flex items-center space-x-4">
-          {user && (
+          {user ? (
             <>
               <span className="font-bold">{user.displayName}</span>
 
@@ -38,9 +38,10 @@ const DashBoard = () => {
                 />
               )}
             </>
+          ) : (
+            <span className="font-bold">{email}</span> // Display email from location or localStorage
           )}
           <li>
-
             <button
               onClick={handleLogout}
               className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
