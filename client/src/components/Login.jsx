@@ -17,6 +17,9 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
+  const api = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+
   const handleGoogleLogin = async () => {
     try {
       setIsLoading(true);
@@ -24,11 +27,9 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       
-      // Get the Google OAuth ID token
       const idToken = await result.user.getIdToken();
       
-      // Send the token to your backend api
-      const response = await fetch('http://localhost:5000/api/auth/google-login', {
+      const response = await fetch(`${api}/api/auth/google-login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${api}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
