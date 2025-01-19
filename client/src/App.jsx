@@ -8,19 +8,6 @@ const App = () => {
     return (
         <HashRouter>
             <div className="min-h-screen bg-gray-200">
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/">Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/signup1">Sign Up 1</Link>
-                        </li>
-                        <li>
-                            <Link to="/signup2">Sign Up 2</Link>
-                        </li>
-                    </ul>
-                </nav>
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/login" element={<Login />} />
