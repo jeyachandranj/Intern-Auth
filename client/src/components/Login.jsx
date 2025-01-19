@@ -6,6 +6,7 @@ import { auth } from "../config/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import girl from "../assets/girl.jpg";
 import logo from "../assets/logo.jpg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +25,6 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       
-      // Store user information in localStorage
       localStorage.setItem('user', JSON.stringify({
         email: result.user.email,
         displayName: result.user.displayName,
@@ -73,14 +73,9 @@ const Login = () => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('userId', data._id);
       localStorage.setItem('accountType', data.accountType);
-      
-      if (rememberMe) {
-        localStorage.setItem('email', formData.email);
-      } else {
-        localStorage.removeItem('email');
-      }
+      console.log("email",formData.email)
 
-      navigate('/dashboard');
+      navigate('/dashboard', { state: { email: formData.email } });
     } catch (error) {
       setError(error.message);
     } finally {
@@ -207,12 +202,13 @@ const Login = () => {
 
             <p className="mt-8 text-center text-gray-600">
               Don't have an account?{" "}
-              <a
-                href="/signup1"
-                className="text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-200"
-              >
-                SignUp
-              </a>
+              
+            <Link
+              to="/signup1"
+              className="text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-200"
+            >
+              SignUp
+            </Link>
             </p>
           </div>
         </div>

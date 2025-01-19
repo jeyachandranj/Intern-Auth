@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes, Link } from "react-router-dom";
 import Login from './components/Login';
 import SignUp1 from './components/SignUp1';
 import SignUp2 from './components/SignUp2';
+import DashBoard from "./components/DashBoard";
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup1" element={<SignUp1 />} />
                     <Route path="/signup2" element={<SignUp2 />} />
+                    <Route path="/dashboard" element={<DashBoard/>}/>
                 </Routes>
             </div>
         </HashRouter>
