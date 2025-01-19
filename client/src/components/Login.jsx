@@ -17,8 +17,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-
-
   const handleGoogleLogin = async () => {
     try {
       setIsLoading(true);
@@ -26,33 +24,15 @@ const Login = () => {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       
-      const idToken = await result.user.getIdToken();
+      // Store user information in localStorage
+      localStorage.setItem('user', JSON.stringify({
+        email: result.user.email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+        uid: result.user.uid
+      }));
       
-      const response = await fetch('https://online-signature.onrender.com/api/auth/google-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          idToken,
-          email: result.user.email,
-          displayName: result.user.displayName,
-          photoURL: result.user.photoURL,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Google login failed');
-      }
-
-      // Store tokens and user data
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userId', data._id);
-      localStorage.setItem('accountType', data.accountType);
-      
-      // Redirect to dashboard
+      // Navigate to dashboard
       navigate('/dashboard');
     } catch (error) {
       console.error('Google login error:', error);
