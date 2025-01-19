@@ -40,7 +40,6 @@ const DashBoard = () => {
             </>
           )}
           <li>
-          <span className="font-bold">{email}</span>
 
             <button
               onClick={handleLogout}
