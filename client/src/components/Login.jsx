@@ -27,7 +27,7 @@ const Login = () => {
       // Get the Google OAuth ID token
       const idToken = await result.user.getIdToken();
       
-      // Send the token to your backend
+      // Send the token to your backend api
       const response = await fetch('http://localhost:5000/api/auth/google-login', {
         method: 'POST',
         headers: {
