@@ -17,7 +17,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  const api = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 
   const handleGoogleLogin = async () => {
@@ -29,7 +28,7 @@ const Login = () => {
       
       const idToken = await result.user.getIdToken();
       
-      const response = await fetch(`${api}/api/auth/google-login`, {
+      const response = await fetch('https://online-signature.onrender.com/api/auth/google-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +76,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch(`${api}/api/auth/login`, {
+      const response = await fetch('https://online-signature.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

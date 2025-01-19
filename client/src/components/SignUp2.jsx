@@ -22,7 +22,6 @@ const SignUp2 = () => {
   });
   const [error, setError] = useState("");
 
-  const api = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 
   const handleChange = (e) => {
@@ -42,7 +41,7 @@ const SignUp2 = () => {
     }
 
     try {
-      const response = await fetch(`${api}/api/auth/signup`, {
+      const response = await fetch('https://online-signature.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
